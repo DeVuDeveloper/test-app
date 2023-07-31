@@ -1,9 +1,11 @@
-<h3>My Ovens</h3>
-
-<ul class="ovens">
-  <% @ovens.each do |oven| %>
-    <li>
-      <%= link_to oven.name, oven %>
-    </li>
-  <% end %>
-</ul>
+<%= turbo_stream_from "ovens" %>
+<h3 class="mt-4">My Ovens</h3>
+<div class="row">
+  <div class="col-md-6">
+    <ul class="list-group ovens">
+      <%= turbo_frame_tag "ovens" do %>
+        <%= render @ovens %>
+      <% end %>
+    </ul>
+  </div>
+</div>

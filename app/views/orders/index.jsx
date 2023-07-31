@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 
-import Orders from "/app/components/orders";
+import Orders from "/app/src/orders";
 
 const element = document.querySelector("[data-order-table]");
 if (element) {

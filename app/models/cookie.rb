@@ -1,6 +1,7 @@
-class Cookie < ActiveRecord::Base
-  belongs_to :storage, polymorphic: :true
-  
+class Cookie < ApplicationRecord
+  belongs_to :storage, polymorphic: true
+
+  validates :fillings, presence: true
   validates :storage, presence: true
 
   def ready?

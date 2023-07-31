@@ -1,0 +1,14 @@
+<div class="cookie-info">
+  <h4>Cookie in oven:</h4>
+  <% if @oven.cookie %>
+    <p>1 cookie with <%= @oven.cookie.fillings || "no fillings" %></p>
+    <% if @oven.cookie.ready? %>
+      <p class="text-success">(Your Cookie is Ready)</p>
+      <%= button_to "Retrieve Cookie", empty_oven_path(@oven), class: 'btn btn-primary btn-sm' %>
+    <% end %>
+  <% else %>
+    <p>None</p>
+    <span class="text-danger">(Oven is empty)</span>
+  <% end %>
+</div>
+

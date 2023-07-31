@@ -3,4 +3,6 @@ class Oven < ActiveRecord::Base
   has_one :cookie, as: :storage, dependent: :destroy
 
   validates :user, presence: true
+
+  broadcasts_to ->(oven) { "ovens"}, inserts_by: :prepend
 end

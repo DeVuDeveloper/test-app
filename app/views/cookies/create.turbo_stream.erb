@@ -1,0 +1,5 @@
+<%= turbo_stream.update dom_id(@oven, "cookie_info") do %>
+  <%= render "ovens/cookie_info", oven: @oven %>
+<% end %>
+<%= render_turbo_stream_flash_messages %>
+

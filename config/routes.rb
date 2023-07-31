@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
 
   resources :ovens do
-    resource :cookies
+    resources :cookies, only: [:new, :create]
     member do
       post :empty
     end

@@ -2,6 +2,8 @@
   "name": "coding_challenge",
   "private": true,
   "dependencies": {
+    "@hotwired/stimulus": "^3.2.1",
+    "@hotwired/turbo": "^7.3.0",
     "@rails/ujs": "^7.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
