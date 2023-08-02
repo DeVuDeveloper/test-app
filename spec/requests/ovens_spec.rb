@@ -1,14 +1,14 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe OvensController do
   let(:user) { create(:user) }
 
-  describe 'GET index' do
+  describe "GET index" do
     context "when not authenticated" do
       before { sign_in nil }
 
       it "blocks access" do
-        get '/ovens'
+        get "/ovens"
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -17,19 +17,19 @@ describe OvensController do
       before { sign_in user }
 
       it "allows access" do
-        get '/ovens'
+        get "/ovens"
         expect(response).to_not be_a_redirect
       end
 
       it "assigns the user's ovens" do
-        get '/ovens'
+        get "/ovens"
 
         expect(assigns(:ovens)).to eq(user.ovens)
       end
     end
   end
 
-  describe 'GET show' do
+  describe "GET show" do
     let(:oven) { create(:oven, user: user) }
 
     context "when not authenticated" do
@@ -66,7 +66,7 @@ describe OvensController do
     end
   end
 
-  describe 'POST empty' do
+  describe "POST empty" do
     let(:oven) { create(:oven, user: user) }
 
     context "when not authenticated" do
@@ -97,7 +97,7 @@ describe OvensController do
 
         post "/ovens/#{oven.id}/empty"
 
-        expect(oven.cookie).to be_nil
+        expect(oven.cookies).to be_empty
         expect(user.stored_cookies.to_a).to match_array([cookie])
       end
 
@@ -111,6 +111,5 @@ describe OvensController do
         end
       end
     end
-
   end
 end

@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe User do
-  subject { User.new(email: 'user@example.com') }
+  subject { User.new(email: "user@example.com") }
 
   describe "associations" do
     it { should have_many(:ovens) }
@@ -9,7 +9,6 @@ describe User do
   end
 
   describe "validations" do
-
   end
 
   describe "on creation" do

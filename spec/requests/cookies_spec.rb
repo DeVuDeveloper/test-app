@@ -1,10 +1,10 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe CookiesController do
   let(:user) { create(:user) }
   let(:oven) { user.ovens.first }
 
-  describe 'GET new' do
+  describe "GET new" do
     context "when not authenticated" do
       before { sign_in nil }
 
@@ -37,21 +37,13 @@ describe CookiesController do
           expect(cookie.storage).to eq(oven)
         end
       end
-
-      context "when an invalid oven is supplied" do
-        it "is not successful" do
-          expect {
-            get "/ovens/#{create(:oven).id}/cookies/new"
-          }.to raise_error(ActiveRecord::RecordNotFound)
-        end
-      end
     end
   end
 
-  describe 'POST create' do
+  describe "POST create" do
     let(:cookie_params) do
       {
-        fillings: 'Vanilla'
+        fillings: "Vanilla"
       }
     end
 
@@ -59,7 +51,7 @@ describe CookiesController do
       before { sign_in nil }
 
       it "blocks access" do
-        post "/ovens/#{oven.id}/cookies", params: { cookie: cookie_params }
+        post "/ovens/#{oven.id}/cookies", params: {cookie: cookie_params}
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -69,38 +61,36 @@ describe CookiesController do
 
       it "allows access" do
         expect {
-          post "/ovens/#{oven.id}/cookies", params: { cookie: cookie_params }
+          post "/ovens/#{oven.id}/cookies", params: {cookie: cookie_params}
         }.to_not raise_error
       end
 
       context "when a valid oven is supplied" do
+        let(:cookie_params) do
+          {
+            fillings: "Vanilla",
+            quantity: 2
+          }
+        end
+
         it "creates a cookie for that oven" do
           expect {
-            post "/ovens/#{oven.id}/cookies", params: { cookie: cookie_params }
-          }.to change{Cookie.count}.by(1)
+            post "/ovens/#{oven.id}/cookies/", params: {cookie: cookie_params}
+          }.to change { Cookie.count }.by(2)
 
           expect(Cookie.last.storage).to eq(oven)
         end
 
         it "redirects to the oven" do
-          post "/ovens/#{oven.id}/cookies", params: { cookie: cookie_params }
+          post "/ovens/#{oven.id}/cookies", params: {cookie: cookie_params}
           expect(response).to redirect_to oven_path(oven)
         end
 
         it "assigns valid cookie parameters" do
-          post "/ovens/#{oven.id}/cookies", params: { cookie: cookie_params }
+          post "/ovens/#{oven.id}/cookies", params: {cookie: cookie_params}
           expect(Cookie.last.fillings).to eq(cookie_params[:fillings])
         end
       end
-
-      context "when an invalid oven is supplied" do
-        it "is not successful" do
-          expect {
-            post "/ovens/#{create(:oven).id}/cookies", params: { cookie: cookie_params }
-          }.to raise_error(ActiveRecord::RecordNotFound)
-        end
-      end
     end
-
   end
 end

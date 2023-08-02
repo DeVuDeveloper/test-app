@@ -3,7 +3,7 @@ FactoryBot.define do
     customer_name { Faker::Name.name }
     fulfilled { false }
     item do
-      filling = ['peanut butter', 'chocolate', 'marshmallow', 'icing'].sample
+      filling = ["peanut butter", "chocolate", "marshmallow", "icing"].sample
       "Cookies with #{filling}"
     end
     quantity { Faker::Number.between(from: 2, to: 24) }

@@ -1,7 +1,6 @@
 class Cookie < ApplicationRecord
+  attr_accessor :quantity
   belongs_to :storage, polymorphic: true
-
-  validates :fillings, presence: true
   validates :storage, presence: true
 
   def ready?

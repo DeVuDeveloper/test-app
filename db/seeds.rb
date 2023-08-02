@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-fillings = ['peanut butter', 'chocolate', 'marshmallow', 'icing']
+fillings = ["peanut butter", "chocolate", "marshmallow", "icing"]
 
 50.times do
   Order.create(

@@ -25,4 +25,3 @@ class StoreComponent < ViewComponent::Base
     end
   end
 end
-

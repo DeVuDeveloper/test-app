@@ -1,0 +1,7 @@
+<h3><%= @oven.name %></h3>
+<%= link_to "Prepare Cookies", new_oven_cookie_path(@oven), data: { turbo_frame: dom_id(Cookie.new) }, class: 'button' %>
+
+<%= turbo_frame_tag dom_id(@oven, "cookie_info") do %>
+  <%= render Ovens::CookieInfoComponent.new(@oven) %>
+  <%= turbo_frame_tag Cookie.new %>
+<% end %>

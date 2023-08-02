@@ -1,13 +1,13 @@
-feature 'Oven' do
-  scenario 'Creating an account' do
-    sign_up_with('myemail@test.com', 'abcdefgh', 'abcdefgh')
+feature "Oven" do
+  scenario "Creating an account" do
+    sign_up_with("myemail@test.com", "abcdefgh", "abcdefgh")
 
     oven = User.last.ovens.first
     expect(oven).to_not be_nil
-    expect(oven.name).to eq('My First Oven')
+    expect(oven.name).to eq("My First Oven")
   end
 
-  scenario 'Viewing an oven page' do
+  scenario "Viewing an oven page" do
     user = create_and_signin
     oven = user.ovens.first
 

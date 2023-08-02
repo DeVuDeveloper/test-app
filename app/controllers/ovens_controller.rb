@@ -10,8 +10,8 @@ class OvensController < ApplicationController
   end
 
   def empty
-    @oven.cookie.update!(storage: current_user) if @oven.cookie.present?
-    redirect_to @oven
+    @oven.cookies&.update(storage: current_user)
+    redirect_to oven_path(@oven)
   end
 
   private

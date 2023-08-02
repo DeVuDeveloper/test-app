@@ -1,13 +1,13 @@
-require 'sidekiq/web'
+require "sidekiq/web"
 
 Rails.application.routes.draw do
   devise_for :users
 
   authenticated :user do
-    root to: 'store#index', as: :store_root
+    root to: "store#index", as: :store_root
   end
 
-  root to: 'visitors#index'
+  root to: "visitors#index"
 
   resources :ovens do
     resources :cookies, only: [:new, :create]
