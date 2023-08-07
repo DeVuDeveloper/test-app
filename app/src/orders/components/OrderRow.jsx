@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatDate } from '../../utils/dateUtils';
+import { formatDate } from '../utils/dateUtils';
 
 const OrderRow = ({ order }) => {
   const { id, created_at, pick_up_at, customer_name, item, quantity, fulfilled } = order;

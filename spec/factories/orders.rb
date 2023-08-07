@@ -7,6 +7,6 @@ FactoryBot.define do
       "Cookies with #{filling}"
     end
     quantity { Faker::Number.between(from: 2, to: 24) }
-    pick_up_at { Faker::Number.between(from: 1, to: 10).days.from_now }
+    pick_up_at { Faker::Number.between(from: 10, to: 20).days.from_now }
   end
 end
