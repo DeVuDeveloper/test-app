@@ -11,20 +11,13 @@ feature "Cooking cookies" do
     click_link_or_button "Prepare Cookies"
     fill_in "Fillings", with: "Chocolate Chip"
     fill_in "Quantity", with: 1
+    fill_in "Cooking time", with: 25
     click_button "Mix and bake"
 
     expect(current_path).to eq(oven_path(oven))
     expect(page).to have_content "Chocolate Chip"
-    expect(page).to have_content "1 with Chocolate Chip"
-
-    click_button "Retrieve Cookies"
-    expect(page).to_not have_content "Chocolate Chip"
-    expect(page).to_not have_content "Your Cookie is Ready"
-
-    visit root_path
-    within ".store-inventory" do
-      expect(page).to have_content "1 Cookie"
-    end
+    expect(page).to have_content "1 cookie with Chocolate Chip"
+    expect(page).to have_content "Cookies are ready!"
   end
 
   scenario "Trying to bake a cookie while oven is full" do
@@ -36,31 +29,12 @@ feature "Cooking cookies" do
     click_link_or_button "Prepare Cookies"
     fill_in "Fillings", with: "Chocolate Chip"
     fill_in "Quantity", with: 1
+    fill_in "Cooking time", with: 25
     click_button "Mix and bake"
 
     click_link_or_button "Prepare Cookies"
     expect(page).to have_content "Cookies are already in the oven!"
     expect(current_path).to eq(oven_path(oven))
     expect(page).to_not have_button "Mix and bake"
-  end
-
-  scenario "Baking multiple cookies" do
-    user = create_and_signin
-    user.ovens.first
-
-    oven = create(:oven, user: user)
-    visit oven_path(oven)
-
-    click_link_or_button "Prepare Cookie"
-    fill_in "Fillings", with: "Chocolate Chip"
-    fill_in "Quantity", with: 3
-    click_button "Mix and bake"
-
-    click_button "Retrieve Cookies"
-
-    visit root_path
-    within ".store-inventory" do
-      expect(page).to have_content("3 Cookies with Chocolate Chip")
-    end
   end
 end

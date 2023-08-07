@@ -1,0 +1,8 @@
+<%= turbo_frame_tag @oven do %>
+  <li>
+    <%= link_to @oven.name,
+      oven_path(@oven),
+      data: { turbo_frame: "_top" }
+    %>
+  </li>
+<% end %>

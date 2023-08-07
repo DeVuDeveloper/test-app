@@ -1,5 +1,3 @@
-require "sidekiq/web"
-
 Rails.application.routes.draw do
   devise_for :users
 
@@ -13,6 +11,7 @@ Rails.application.routes.draw do
     resources :cookies, only: [:new, :create]
     member do
       post :empty
+      get :oven_status
     end
   end
 
@@ -23,6 +22,4 @@ Rails.application.routes.draw do
       put :fulfill, on: :member
     end
   end
-
-  mount Sidekiq::Web => "/sidekiq"
 end

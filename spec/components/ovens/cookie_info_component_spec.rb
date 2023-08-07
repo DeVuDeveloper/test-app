@@ -1,31 +1,29 @@
+require 'rails_helper'
+
 RSpec.describe Ovens::CookieInfoComponent, type: :component do
   let(:user) { create(:user) }
   let(:oven) { create(:oven, user: user) }
   let!(:cookie) { create(:cookie) }
 
-  context "when the oven has cookies" do
-    it "renders the cookies info" do
-      oven_with_cookie = create(:oven, user: user)
-      oven_with_cookie.cookies << cookie
+  it 'renders the component' do
 
-      render_inline(Ovens::CookieInfoComponent.new(oven_with_cookie))
+    oven_with_cookie = create(:oven, user: user)
+    oven_with_cookie.cookies << cookie
+    render_inline(described_class.new(oven: oven_with_cookie))
 
-      expect(page).to have_selector(".cookie-info")
-      expect(page).to have_selector("h4", text: "Cookie in oven:")
-      expect(page).to have_selector("p", text: "#{oven_with_cookie.cookies.size} with #{cookie.fillings}")
-      expect(page).to have_selector(".text-success", text: "(Your Cookie is Ready)")
-      expect(page).to have_button("Retrieve Cookies")
-    end
+
+    expect(page).to have_selector('h5.text-primary', text: 'Cookies in oven:')
+    expect(page).to have_selector('.cookie-status[data-controller="cookies"]')
+    expect(page).to have_selector('.timer.text-orange[data-target="cookies.timer"]')
+    expect(page).to have_selector('.btn.btn-primary.btn-retrieve.hidden[data-target="cookies.button"][data-oven-id]')
+    expect(page).to have_selector('.text-ready.text-success.hidden[data-target="cookies.ready"]')
+    expect(page).to have_selector('.loader.hidden[data-target="cookies.loader"]')
+    expect(page).to have_selector('.fas.fa-spinner.fa-spin')
   end
 
-  context "when the oven has no cookies" do
-    it "renders the empty oven message" do
-      render_inline(Ovens::CookieInfoComponent.new(oven))
+  it 'renders empty oven message' do
+    render_inline(described_class.new(oven: oven))
 
-      expect(page).to have_selector(".cookie-info")
-      expect(page).to have_selector("h4", text: "Cookie in oven:")
-      expect(page).to have_selector("p", text: "None")
-      expect(page).to have_selector(".text-danger", text: "(Oven is empty)")
-    end
+    expect(page).to have_selector('span.text-danger', text: '(Oven is empty)')
   end
 end

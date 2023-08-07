@@ -10,13 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2018_01_16_140702) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_03_081625) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cookies", force: :cascade do |t|
     t.text "fillings"
     t.string "storage_type"
-    t.integer "storage_id"
+    t.bigint "storage_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.datetime "cooked_at"
     t.index ["storage_type", "storage_id"], name: "index_cookies_on_storage_type_and_storage_id"
   end
 
@@ -32,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2018_01_16_140702) do
 
   create_table "ovens", force: :cascade do |t|
     t.text "name"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_ovens_on_user_id"

@@ -1,13 +1,15 @@
 class CookiesController < ApplicationController
+  include OvenLoading
+
   rescue_from Cookies::CreateService::ValidationError, with: :render_form_with_errors
   before_action :authenticate_user!
-  before_action :set_oven, only: [:new, :create]
+  before_action :load_oven, only: [:new, :create]
 
   def new
     if @oven.cookies.any?
       respond_to do |format|
         format.html { redirect_to @oven, alert: "Cookies are already in the oven!" }
-        format.turbo_stream { flash.now[:alert] = "Cookies are already in the oven!" }
+        format.turbo_stream { flash.now[:alert] = "Cookies are already in oven" }
       end
     else
       @cookie = @oven.cookies.build
@@ -15,12 +17,10 @@ class CookiesController < ApplicationController
   end
 
   def create
-    create_service = Cookies::CreateService.new(@oven, @cookie, cookie_params)
+    create_service = Cookies::CreateService.new(@oven, cookie_params)
+
     if create_service.call
-      respond_to do |format|
-        format.html { redirect_to oven_path(@oven), notice: "Cookies were successfully created." }
-        format.turbo_stream { flash.now[:notice] = "Cookies were successfully created." }
-      end
+      cookies_created_successfully
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,12 +33,21 @@ class CookiesController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
-  def set_oven
-    @oven = current_user.ovens.includes(:cookies).find_by(id: params[:oven_id])
-    redirect_to ovens_path, alert: "Oven not found" unless @oven
+  def oven_already_has_cookies
+    respond_to do |format|
+      format.html { redirect_to @oven, alert: "Cookies are already in the oven!" }
+      format.turbo_stream { flash.now[:alert] = "Cookies are already in the oven!" }
+    end
+  end
+
+  def cookies_created_successfully
+    respond_to do |format|
+      format.html { redirect_to oven_path(@oven), notice: "Cookies were successfully created." }
+      format.turbo_stream { flash.now[:notice] = "Cookies were successfully created." }
+    end
   end
 
   def cookie_params
-    params.require(:cookie).permit(:fillings, :quantity, :storage)
+    params.require(:cookie).permit(:fillings, :quantity, :storage, :cooking_time)
   end
 end

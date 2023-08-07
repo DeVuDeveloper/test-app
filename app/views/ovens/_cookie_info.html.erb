@@ -1,1 +1,19 @@
-<%= render Ovens::CookieInfoComponent .new(@oven) %>
+<%= turbo_frame_tag dom_id(oven, "cookie_info") do %>
+<%= render Ovens::CookieInfoComponent.new(oven: oven) %>
+  <%= turbo_frame_tag Cookie.new %>
+  <script>
+    document.addEventListener("turbo:load", function() {
+      const retrieveButton = document.querySelector(".btn-retrieve");
+
+      if (retrieveButton) {
+        retrieveButton.addEventListener("click", function() {
+          setTimeout(function() {
+            Turbo.visit(window.location, { action: "replace" });
+          }, 1000);
+        });
+      }
+    });
+  </script>
+<% end %>
+
+

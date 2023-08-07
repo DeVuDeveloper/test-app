@@ -1,42 +1,47 @@
 class Cookies::CreateService < ApplicationService
-  def initialize(oven, cookie, params)
+  def initialize(oven, params)
     @oven = oven
     @params = params
-    @cookie = cookie
   end
 
   def call
-    create_cookies
+    validate_and_create_cookies
   end
 
   private
 
-  def create_cookies
+  def validate_and_create_cookies
+    validate_params
+    create_cookies
+  end
+
+  def validate_params
     fillings = @params[:fillings]
     num_cookies_to_bake = @params[:quantity].to_i
-
-    if fillings.blank?
-      @cookie = @oven.cookies.build(@params)
-      @cookie.errors.add(:fillings, "must be present.")
-      raise ValidationError, @cookie
-    end
-
-    if num_cookies_to_bake <= 0
-      @cookie = @oven.cookies.build(@params)
-      @cookie.errors.add(:quantity, ": please enter a valid quantity.")
-      raise ValidationError, @cookie
-    elsif num_cookies_to_bake > 20
-      @cookie = @oven.cookies.build(@params)
-      @cookie.errors.add(:quantity, ": you can't put more than 20 cookies in the oven.")
-      raise ValidationError, @cookie
-    end
+    cooking_time = @params[:cooking_time].to_i
+  
+    raise Cookies::CreateService::ValidationError, build_cookie_with_error("fillings", "must be present.") if fillings.blank?
+    raise Cookies::CreateService::ValidationError, build_cookie_with_error("quantity", ": please enter a valid quantity.") if num_cookies_to_bake <= 0 || num_cookies_to_bake > 20
+    raise Cookies::CreateService::ValidationError, build_cookie_with_error("cooking_time", ": please enter a valid cooking time.") if cooking_time <= 15
+  end
+  
+  def create_cookies
+    num_cookies_to_bake = @params[:quantity].to_i
+    cooking_time = @params[:cooking_time].to_i
 
     num_cookies_to_bake.times do
       cookie = @oven.cookies.build(@params)
       cookie.save
+      cookie.update(cooked_at: Time.now + cooking_time)
     end
   end
 
+  def build_cookie_with_error(attribute, message)
+    cookie = @oven.cookies.build(@params)
+    cookie.errors.add(attribute, message)
+    raise Cookies::CreateService::ValidationError.new(cookie)
+  end
+  
   class ValidationError < StandardError
     attr_reader :cookie
 

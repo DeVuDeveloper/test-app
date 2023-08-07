@@ -7,7 +7,6 @@ Bundler.require(*Rails.groups)
 
 module CodingChallenge
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
     config.generators do |g|
@@ -21,19 +20,13 @@ module CodingChallenge
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.autoload_paths += %W(#{config.root}/app/jobs)
 
-    # Don't generate system test files.
 
     config.generators.system_tests = nil
 
+    config.proscenium.include_paths << "app/views"
     config.proscenium.include_paths << "app/components"
-    config.proscenium.include_paths << "app/forms"
+    config.proscenium.include_paths << "app/javascript"
   end
 end

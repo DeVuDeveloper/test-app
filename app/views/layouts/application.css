@@ -38,3 +38,10 @@ main {
   }
 }
 
+.text-orange {
+  color: hsl(22, 96%, 50%);
+}
+
+.hidden {
+  display: none;
+}

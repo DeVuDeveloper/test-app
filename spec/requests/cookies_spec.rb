@@ -69,7 +69,8 @@ describe CookiesController do
         let(:cookie_params) do
           {
             fillings: "Vanilla",
-            quantity: 2
+            quantity: 2,
+            cooking_time: 25
           }
         end
 

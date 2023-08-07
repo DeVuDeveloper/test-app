@@ -1,7 +1,9 @@
-<%= simple_form_for [oven, cookie], html: { class: 'form-horizontal' } do |f| %>
+<%= simple_form_for [oven, cookie], remote: true, html: { class: 'form-horizontal', id: 'cookie-form', 'data-controller': 'reload', 'data-action': 'turbo:submit-end->reload#afterSubmit', 'data-target': 'reload.form' } do |f| %>
   <%= form_error_notification(cookie) %>
   <%= form_group(f, :fillings, 'Fillings', 'text') %>
-  <%= form_group(f, :quantity, 'Quantity', 'numeric') %>
+  <%= form_group(f, :quantity, 'Quantity(max up to 20)', 'numeric') %>
+  <%= form_group(f, :cooking_time, 'Cooking time(greater than 20)', 'numeric') %>
   <%= form_actions(f) %>
 <% end %>
+
 
