@@ -11,7 +11,7 @@ class Oven < ActiveRecord::Base
   def first_cookie
     cookies.first
   end
-  
+
   def time_left_for_first_cookie
     first_cookie = self.first_cookie
     return 0 if first_cookie.nil? || first_cookie.cooked_at.nil?

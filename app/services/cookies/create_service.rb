@@ -19,12 +19,12 @@ class Cookies::CreateService < ApplicationService
     fillings = @params[:fillings]
     num_cookies_to_bake = @params[:quantity].to_i
     cooking_time = @params[:cooking_time].to_i
-  
+
     raise Cookies::CreateService::ValidationError, build_cookie_with_error("fillings", "must be present.") if fillings.blank?
     raise Cookies::CreateService::ValidationError, build_cookie_with_error("quantity", ": please enter a valid quantity.") if num_cookies_to_bake <= 0 || num_cookies_to_bake > 20
     raise Cookies::CreateService::ValidationError, build_cookie_with_error("cooking_time", ": please enter a valid cooking time.") if cooking_time <= 15
   end
-  
+
   def create_cookies
     num_cookies_to_bake = @params[:quantity].to_i
     cooking_time = @params[:cooking_time].to_i
@@ -41,7 +41,7 @@ class Cookies::CreateService < ApplicationService
     cookie.errors.add(attribute, message)
     raise Cookies::CreateService::ValidationError.new(cookie)
   end
-  
+
   class ValidationError < StandardError
     attr_reader :cookie
 

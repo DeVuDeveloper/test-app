@@ -15,9 +15,9 @@ class OvensController < ApplicationController
   end
 
   def oven_status
-    render json: { ready: @oven.first_cookie_ready?, time_left: @oven.time_left_for_first_cookie }
+    render json: {ready: @oven.first_cookie_ready?, time_left: @oven.time_left_for_first_cookie}
   end
-  
+
   private
 
   def set_oven

@@ -16,4 +16,3 @@ RSpec.describe Ovens::IndexComponent, type: :component do
     end
   end
 end
-

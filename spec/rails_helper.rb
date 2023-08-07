@@ -26,7 +26,7 @@ RSpec.configure do |config|
     raise "component snapshot has no content" if rendered_component.blank?
     expect(rendered_component).to match_snapshot("#{class_name}/#{test_name}")
   end
- 
+
   config.use_transactional_fixtures = true
 
   config.infer_spec_type_from_file_location!
