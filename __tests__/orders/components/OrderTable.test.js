@@ -64,6 +64,7 @@ describe('OrderTable Component', () => {
 
     expect(spinner).toBeInTheDocument();
   });
+
 });
 
 

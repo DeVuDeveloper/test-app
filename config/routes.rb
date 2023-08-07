@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :orders, only: [:index] do
-      put :fulfill, on: :member
+      patch :fulfill, on: :member
     end
   end
 end

@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import OrderTable from "../components/OrderTable";
-import Pagination from "../components//Pagination";
 import useFetchOrders from "../hooks/UseFetchOrders";
 import { getColumnValue, compareValues } from "../utils/sortingUtils";
 
 const OrdersPage = () => {
   const { orders, loading } = useFetchOrders();
-  const [sortColumn, setSortColumn] = useState("id"); 
+  const [sortColumn, setSortColumn] = useState("id");
   const [sortDirection, setSortDirection] = useState("asc");
-  const [currentPage, setCurrentPage] = useState(1);
-  const ordersPerPage = 10;
 
   const handleSortChange = (column) => {
     let newSortDirection = "asc";
@@ -22,6 +19,25 @@ const OrdersPage = () => {
     setSortDirection(newSortDirection);
   };
 
+  const handleFulfillOrder = async (order) => {
+    try {
+      const response = await fetch(`/api/orders/${order.id}/fulfill`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ fulfilled: true }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fulfill order");
+      }
+    } catch (error) {
+      console.error("Error fulfilling order:", error);
+      throw error;
+    }
+  };
+
   const sortedOrders = orders.slice().sort((a, b) => {
     const columnA = getColumnValue(a, sortColumn);
     const columnB = getColumnValue(b, sortColumn);
@@ -31,32 +47,19 @@ const OrdersPage = () => {
       : compareValues(columnB, columnA);
   });
 
-  const indexOfLastOrder = currentPage * ordersPerPage;
-  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
-  const currentOrders = sortedOrders.slice(indexOfFirstOrder, indexOfLastOrder);
-
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   return (
     <div>
       <h2>Orders</h2>
       <OrderTable
-        orders={currentOrders}
+        orders={sortedOrders}
         loading={loading}
         sortColumn={sortColumn}
         sortDirection={sortDirection}
         onSortChange={handleSortChange}
-      />
-      <Pagination
-        ordersPerPage={ordersPerPage}
-        totalOrders={sortedOrders.length}
-        paginate={paginate}
+        onFulfillOrder={handleFulfillOrder}
       />
     </div>
   );
 };
 
 export default OrdersPage;
-

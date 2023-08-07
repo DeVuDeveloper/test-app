@@ -16,7 +16,7 @@ const Pagination = ({ ordersPerPage, totalOrders, paginate }) => {
             onClick={() => paginate(number)}
             href="#"
             className="page-link"
-            data-testid={`pagination-link-${number}`} // Add this line
+            data-testid={`pagination-link-${number}`}
           >
             {number}
           </a>

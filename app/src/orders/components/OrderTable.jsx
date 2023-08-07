@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner, faSort, faSortUp, faSortDown } from "@fortawesome/free-solid-svg-icons";
 import OrderRow from "./OrderRow";
 
-const OrderTable = ({ orders, loading, sortColumn, sortDirection, onSortChange }) => {
+const OrderTable = ({ orders, loading, sortColumn, sortDirection, onSortChange, onFulfillOrder }) => {
   const handleSortChange = (column) => {
     onSortChange(column);
   };
@@ -49,7 +49,9 @@ const OrderTable = ({ orders, loading, sortColumn, sortDirection, onSortChange }
             </td>
           </tr>
         ) : (
-          orders.map((order) => <OrderRow key={order.id} order={order} />)
+          orders.map((order) => (
+            <OrderRow key={order.id} order={order} onFulfillOrder={() => onFulfillOrder(order)} />
+          ))
         )}
       </tbody>
     </table>
@@ -57,4 +59,3 @@ const OrderTable = ({ orders, loading, sortColumn, sortDirection, onSortChange }
 };
 
 export default OrderTable;
-
