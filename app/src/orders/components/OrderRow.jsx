@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { formatDate } from '../utils/dateUtils';
 
 const OrderRow = ({ order, onFulfillOrder }) => {
@@ -13,23 +13,22 @@ const OrderRow = ({ order, onFulfillOrder }) => {
       setIsFulfilling(false);
       order.fulfilled = true;
     } catch (error) {
-      
       setIsFulfilling(false);
     }
   };
 
   return (
     <tr>
-      <td data-testid="order-id">{id}</td>
-      <td data-testid="created-at">{formatDate(created_at)}</td>
-      <td data-testid="pick-up-at">{formatDate(pick_up_at)}</td>
-      <td data-testid="customer-name">{customer_name}</td>
-      <td data-testid="item">{item}</td>
-      <td data-testid="quantity">{quantity}</td>
-      <td data-testid="fulfilled-status">{fulfilled ? 'Fulfilled' : 'In progress'}</td>
+      <td>Order ID: {id}</td>
+      <td>{formatDate(created_at)}</td>
+      <td>{formatDate(pick_up_at)}</td>
+      <td>{customer_name}</td>
+      <td>{item}</td>
+      <td>{quantity}</td>
+      <td>{fulfilled ? 'Fulfilled' : 'In progress'}</td>
       <td>
         {!fulfilled && (
-          <button data-testid="fulfill-button" onClick={handleFulfillClick} disabled={isFulfilling}>
+          <button onClick={handleFulfillClick} disabled={isFulfilling}>
             {isFulfilling ? 'Fulfilling...' : 'Fulfill order'}
           </button>
         )}
@@ -39,6 +38,7 @@ const OrderRow = ({ order, onFulfillOrder }) => {
 };
 
 export default OrderRow;
+
 
 
 
