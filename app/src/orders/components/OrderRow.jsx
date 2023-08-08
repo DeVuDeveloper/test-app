@@ -2,13 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { formatDate } from '../utils/dateUtils';
 
 const OrderRow = ({ order, onFulfillOrder }) => {
-  const { id, created_at, pick_up_at, customer_name, item, quantity } = order;
+  const { id, created_at, pick_up_at, customer_name, item, quantity, fulfilled } = order;
   const [isFulfilling, setIsFulfilling] = useState(false);
-  const [currentFulfilledStatus, setCurrentFulfilledStatus] = useState(false);
-
-  useEffect(() => {
-    setCurrentFulfilledStatus(order.fulfilled);
-  }, [order]);
 
   const handleFulfillClick = async () => {
     setIsFulfilling(true);
@@ -16,10 +11,9 @@ const OrderRow = ({ order, onFulfillOrder }) => {
     try {
       await onFulfillOrder(order);
       setIsFulfilling(false);
-      setCurrentFulfilledStatus(true);
-      storeFulfilledStatus(id, true);
+      order.fulfilled = true;
     } catch (error) {
-      console.error('Error fulfilling order:', error);
+      
       setIsFulfilling(false);
     }
   };
@@ -32,9 +26,9 @@ const OrderRow = ({ order, onFulfillOrder }) => {
       <td data-testid="customer-name">{customer_name}</td>
       <td data-testid="item">{item}</td>
       <td data-testid="quantity">{quantity}</td>
-      <td data-testid="fulfilled-status">{currentFulfilledStatus ? 'Fulfilled' : 'In progress'}</td>
+      <td data-testid="fulfilled-status">{fulfilled ? 'Fulfilled' : 'In progress'}</td>
       <td>
-        {!currentFulfilledStatus && (
+        {!fulfilled && (
           <button data-testid="fulfill-button" onClick={handleFulfillClick} disabled={isFulfilling}>
             {isFulfilling ? 'Fulfilling...' : 'Fulfill order'}
           </button>
@@ -44,10 +38,8 @@ const OrderRow = ({ order, onFulfillOrder }) => {
   );
 };
 
-const storeFulfilledStatus = (orderId, status) => {
-  localStorage.setItem(`order_${orderId}_fulfilled`, status);
-};
-
 export default OrderRow;
+
+
 
 

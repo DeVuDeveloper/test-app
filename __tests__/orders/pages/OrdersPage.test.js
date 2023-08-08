@@ -1,7 +1,7 @@
 import React from "react";
 import OrdersPage from "../../../app/src/orders/pages/OrdersPage";
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom/';
 
 jest.mock("../../../app/src/orders/hooks/UseFetchOrders", () => {
   return () => ({

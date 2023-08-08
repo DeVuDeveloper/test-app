@@ -1,30 +1,28 @@
 import { useEffect, useState } from "react";
 
-const UseFetchOrders = () => {
+const useFetchOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
+  const fetchOrders = async () => {
+    try {
+      const response = await fetch("/api/orders");
+      const data = await response.json();
+      setOrders(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch("/api/orders.json");
-        const data = await response.json();
-        setOrders(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
     fetchOrders();
   }, []);
 
-  return { orders, loading, error };
+  return { orders, loading, fetchOrders };
 };
 
-export default UseFetchOrders;
+export default useFetchOrders;
 
 
 

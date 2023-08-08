@@ -50,7 +50,8 @@ const OrderTable = ({ orders, loading, sortColumn, sortDirection, onSortChange, 
           </tr>
         ) : (
           orders.map((order) => (
-            <OrderRow key={order.id} order={order} onFulfillOrder={() => onFulfillOrder(order)} />
+            <OrderRow key={order.id} order={order} onFulfillOrder={onFulfillOrder} />
+
           ))
         )}
       </tbody>

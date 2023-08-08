@@ -1,13 +1,11 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import OrderTable from '../../../app/src/orders/components/OrderTable';
-import '@testing-library/jest-dom/extend-expect';
-
+import '@testing-library/jest-dom/';
 
 describe('OrderTable Component', () => {
   const fakeOrders = [
-    // Dodajte lažne podatke ovde
+  
   ];
 
   it('displays sorting icons correctly', () => {
