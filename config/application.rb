@@ -20,8 +20,6 @@ module CodingChallenge
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
-    config.autoload_paths += %W[#{config.root}/app/jobs]
-
     config.generators.system_tests = nil
 
     config.proscenium.include_paths << "app/views"

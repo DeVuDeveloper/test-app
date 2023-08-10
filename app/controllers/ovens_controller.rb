@@ -4,6 +4,8 @@ class OvensController < ApplicationController
 
   def index
     @ovens = current_user.ovens
+    @oven = Oven.first
+    @cookie = Cookie.new
   end
 
   def show
@@ -11,7 +13,10 @@ class OvensController < ApplicationController
 
   def empty
     @oven.cookies&.update(storage: current_user)
-    redirect_to oven_path(@oven)
+    respond_to do |format|
+      format.html { redirect_to oven_path(@oven) }
+      format.turbo_stream 
+    end
   end
 
   def oven_status

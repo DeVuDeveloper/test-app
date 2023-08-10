@@ -1,0 +1,12 @@
+
+<%= render_turbo_stream_flash_messages %>
+
+<%= turbo_stream.replace dom_id(@oven, "cookie_info") do %>
+  <%= render "ovens/cookie_info", oven: @oven %>
+<% end %>
+
+
+<%= turbo_stream.replace dom_id(@oven, "store") do %>
+  <%= render "ovens/store", oven: @oven %>
+<% end %>
+ 

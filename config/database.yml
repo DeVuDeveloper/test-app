@@ -5,14 +5,14 @@ default: &default
 
 development:
   <<: *default
-  database: test1_app_development
+  database: test_app_development
 
 test:
   <<: *default
-  database: test1_app_test
+  database: test_app_test
 
 production:
   <<: *default
-  database: test1_app_production
-  username: test1_app
+  database: test_app_production
+  username: test_app
   password: <%= ENV["Test1_App_DATABASE_PASSWORD"] %>

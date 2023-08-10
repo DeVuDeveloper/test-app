@@ -1,11 +1,13 @@
-<div class="store">
-  <h3>Your Bakery</h3>
-  <%= render_bakery_nav %>
-  <br>
-  <div class="store-inventory">
-    Cookies for sale:
-    <ul>
-      <%= render_cookies_for_sale %>
-    </ul>
+<div class="px-8 bg-gradient-to-b from-blue-500 to-blue-700 text-white py-12">
+  <div class="max-w-5xl mx-auto">
+    <h3 class="text-3xl font-semibold mb-4">Your Bakery</h3>
+    <%= render_bakery_nav %>
+    <div class="mt-6 store-inventory">
+      <p class="text-lg font-semibold">Cookies for sale:</p>
+      <ul class="mt-2 space-y-2">
+        <%= render_cookies_for_sale %>
+      </ul>
+    </div>
   </div>
 </div>
+

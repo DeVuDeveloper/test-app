@@ -33,7 +33,7 @@ describe('OrderTable Component', () => {
         orders={fakeOrders}
         loading={false}
         sortColumn="ordered_at"
-        sortDirection="desc"  // Promenjeno u "desc" za sort-up
+        sortDirection="desc"
         onSortChange={handleSortChangeMock}
       />
     );

@@ -2,7 +2,6 @@ SimpleForm.setup do |config|
   config.wrappers :default, class: "form__group" do |b|
     b.use :html5
     b.use :placeholder
-    b.use :label, class: "visually-hidden"
     b.use :input, class: "form__input", error_class: "form__input--invalid"
   end
 
@@ -14,5 +13,4 @@ SimpleForm.setup do |config|
   config.error_notification_class = "error_notification"
   config.browser_validations = false
   config.boolean_style = :nested
-  config.boolean_label_class = "form__checkbox-label"
-end
+ end

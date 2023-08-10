@@ -2,6 +2,8 @@ class Oven < ActiveRecord::Base
   belongs_to :user
   has_many :cookies, as: :storage, dependent: :destroy
 
+  enum fillings: { chocolate: 0, strawberry: 1, vanilla: 2 }
+  
   validates :user, presence: true
 
   broadcasts_to ->(oven) { "ovens" }, inserts_by: :prepend

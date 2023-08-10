@@ -1,0 +1,23 @@
+<%= turbo_stream_from dom_id(oven, "store") %>
+
+<div class="max-w-5xl mx-auto">
+  <h3 class="text-3xl font-semibold mb-4">Your Bakery</h3>
+  <%= content_tag(:div, class: "text-center mb-6") do %>
+    <%= link_to "View your ovens", ovens_path, class: "inline-block px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-100 font-semibold rounded transition duration-300 ease-in-out" %>
+  <% end %>
+  <div class="mt-6 store-inventory">
+    <p class="text-lg font-semibold">Cookies for sale:</p>
+    <ul class="mt-2 space-y-2">
+      <% cookies_for_sale = current_user.stored_cookies.group_by(&:fillings) %>
+      <% if cookies_for_sale.any? %>
+        <% cookies_for_sale.each do |fillings, cookies| %>
+          <li class="mb-2 text-blue-300">
+            <%= "#{pluralize(cookies.count, "Cookie")} with #{fillings || "no filling"}" %>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="mb-2 text-gray-800">No cookies for sale</li>
+      <% end %>
+    </ul>
+  </div>
+</div>
