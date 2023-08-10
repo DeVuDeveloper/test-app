@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`clicking retrieve button updates UI and triggers visit 1`] = `
-"<div class="cookie-info hidden" data-controller="cookie-info" data-cookie-info-target="button">
-      <button class="btn-retrieve">Retrieve Cookies</button>
-    </div>"
-`;

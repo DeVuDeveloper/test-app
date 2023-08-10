@@ -15,7 +15,7 @@ class OvensController < ApplicationController
     @oven.cookies&.update(storage: current_user)
     respond_to do |format|
       format.html { redirect_to oven_path(@oven) }
-      format.turbo_stream 
+      format.turbo_stream
     end
   end
 

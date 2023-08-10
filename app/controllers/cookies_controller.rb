@@ -17,8 +17,6 @@ class CookiesController < ApplicationController
   end
 
   def create
-    fillings = params[:fillings]
-
     create_service = Cookies::CreateService.new(@oven, cookie_params)
     if create_service.call
       cookies_created_successfully
@@ -33,7 +31,7 @@ class CookiesController < ApplicationController
   def render_form_with_errors(exception)
     @cookie = exception.cookie
     @ovens = current_user.ovens
-    render 'ovens/index', status: :unprocessable_entity
+    render "ovens/index", status: :unprocessable_entity
   end
 
   def oven_already_has_cookies
