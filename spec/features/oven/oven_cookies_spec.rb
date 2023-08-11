@@ -5,18 +5,18 @@
 #   let!(:oven) { user.ovens.first }
 
 #   before do
-#     visit oven_path(oven)
-#     click_link_or_button "Prepare Cookies"
+#     visit ovens_path
 #   end
 
 #   scenario "preparing a batch of cookies with the same filling" do
-#     fill_in "Fillings", with: "Chocolate Chip"
-#     fill_in "Quantity", with: 10
-#     fill_in "Cooking time", with: 25
-#     click_button "Mix and bake"
-#     expect(page).to_not have_content("Your Cookie is Ready")
+#     find('[data-filling="Mango"]')
+#     click_link_or_button  "Mango"
+#     fill_in "Qty", with: 10
+#     fill_in "Time", with: 25
+#     click_button "Start"
+#     expect(page).to_not have_content("Cookie are Ready")
 #     expect(oven.cookies.count).to eq(10)
-#     expect(oven.cookies.pluck(:fillings).uniq).to contain_exactly("Chocolate Chip")
+#     expect(oven.cookies.pluck(:fillings).uniq).to contain_exactly("Mango")
 #   end
 
 #   scenario "trying to bake more than 20 cookies" do

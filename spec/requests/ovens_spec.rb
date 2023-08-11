@@ -29,14 +29,14 @@ describe OvensController do
     end
   end
 
-  describe "GET show" do
+  describe "GET index" do
     let(:oven) { create(:oven, user: user) }
 
     context "when not authenticated" do
       before { sign_in nil }
 
       it "blocks access" do
-        get "/ovens/#{oven.id}"
+        get "/ovens/"
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -45,23 +45,8 @@ describe OvensController do
       before { sign_in user }
 
       it "allows access" do
-        get "/ovens/#{oven.id}"
+        get "/ovens/"
         expect(response).to_not be_a_redirect
-      end
-
-      it "assigns the @oven" do
-        get "/ovens/#{oven.id}"
-        expect(assigns(:oven)).to eq(oven)
-      end
-
-      context "when requesting someone else's oven" do
-        let(:oven) { create(:oven) }
-
-        it "blocks access" do
-          expect {
-            get "/ovens/#{oven.id}"
-          }.to raise_error(ActiveRecord::RecordNotFound)
-        end
       end
     end
   end

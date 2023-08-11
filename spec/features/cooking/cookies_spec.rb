@@ -1,40 +1,20 @@
-# feature "Cooking cookies" do
-#   scenario "Cooking cookies" do
-#     user = create_and_signin
-#     oven = user.ovens.first
+feature "Cooking cookies" do
+  scenario "If custom validation is triggered" do
+    user = create_and_signin
+    user.ovens.first
 
-#     visit ovens_path
+    visit ovens_path
 
-#     expect(page).to_not have_content "Chocolate Chip"
-#     expect(page).to_not have_content "Your Cookie is Ready"
+    expect(page).to_not have_content "Mango"
+    expect(page).to_not have_content "Cookies are ready!"
 
-#     click_link_or_button "Prepare Cookies"
-#     fill_in "Fillings", with: "Chocolate Chip"
-#     fill_in "Quantity", with: 1
-#     fill_in "Cooking time", with: 25
-#     click_button "Mix and bake"
+    fill_in "Qty", with: "5"
+    fill_in "Time", with: 20
 
-#     expect(current_path).to eq(oven_path(oven))
-#     expect(page).to have_content "Chocolate Chip"
-#     expect(page).to have_content "1 cookie with Chocolate Chip"
-#     expect(page).to have_content "Cookies are ready!"
-#   end
+    click_button "Start"
 
-#   scenario "Trying to bake a cookie while oven is full" do
-#     user = create_and_signin
-#     oven = user.ovens.first
-
-#     visit oven_path(oven)
-
-#     click_link_or_button "Prepare Cookies"
-#     fill_in "Fillings", with: "Chocolate Chip"
-#     fill_in "Quantity", with: 1
-#     fill_in "Cooking time", with: 25
-#     click_button "Mix and bake"
-
-#     click_link_or_button "Prepare Cookies"
-#     expect(page).to have_content "Cookies are already in the oven!"
-#     expect(current_path).to eq(oven_path(oven))
-#     expect(page).to_not have_button "Mix and bake"
-#   end
-# end
+    expect(page).to have_content "No cookies for sale"
+    expect(page).to have_content "Oven is empty"
+    expect(page).to have_content "Fillings must be present"
+  end
+end

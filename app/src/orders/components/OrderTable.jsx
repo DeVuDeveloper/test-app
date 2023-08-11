@@ -51,7 +51,6 @@ const OrderTable = ({ orders, loading, sortColumn, sortDirection, onSortChange, 
         ) : (
           orders.map((order) => (
             <OrderRow key={order.id} order={order} onFulfillOrder={onFulfillOrder} />
-
           ))
         )}
       </tbody>

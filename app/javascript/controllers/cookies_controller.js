@@ -13,6 +13,8 @@ export default class extends Controller {
       this.fetchOvenStatus();
     }, 5000);
   }
+
+  
   async fetchOvenStatus() {
     try {
       const ovenId = this.data.get("ovenId");
@@ -25,17 +27,15 @@ export default class extends Controller {
       } else {
         this.updateTimer(data.time_left, false);
     
-
         if (data.cookies_empty) {
           this.buttonTarget.style.display = "none";
-          this.readyTarget.style.display = "none";
-          this.element.querySelector(".text-red-500").style.display = "block"; 
+          this.readyTarget.style.display = "none"; 
+          this.emptyTarget.style.display = "block";
         }
       }
     } catch (error) {
     }
   }
-  
   
   updateTimer(remainingTime, ready) {
     this.timerTarget.textContent = `Remaining time: ${Math.round(remainingTime)} seconds`;

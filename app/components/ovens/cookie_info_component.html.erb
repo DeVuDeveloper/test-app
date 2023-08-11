@@ -1,18 +1,21 @@
-<div class="cookie-info">
- <% if @oven.cookies.any? %>
-  <h5 class="mb-3 text-blue-400">Cookies in oven:</h5>
-  <p class="text-green-500">
-    <%= pluralize(@oven.cookies.size, "cookie") %> with <%= @oven.first_cookie_fillings || "no fillings" %>
-  </p>
-  <div class="cookie-status" data-controller="cookies" data-cookies-oven-id="<%= @oven.id %>">
-    <div class="timer text-orange" data-target="cookies.timer"></div>
-    <%= button_to("Retrieve Cookies", empty_oven_path(@oven), class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 btn-retrieve hidden", data: { "oven-id": @oven.id, target: "cookies.button" }, method: :post) %>
-    <div class="text-ready text-green-400 hidden" data-target="cookies.ready">Cookies are ready!</div>
-    <div class="loader hidden" data-target="cookies.loader">
-      <i class="fas fa-spinner fa-spin"></i>
-    </div>
+<%= turbo_frame_tag dom_id(@oven, "cookie_info") do %>
+
+  <div class="cookie-info flex flex-col justify-between text-center">
+    <% if @oven.cookies.any? { |cookie| cookie.cooked_at.present? } %>
+      <div>
+        <p class="text-orange-500">
+          <%= pluralize(@oven.cookies.size, "cookie") %> with <%= @oven.first_cookie_fillings || "no fillings" %>
+        </p>
+        <div class="cookie-status" data-controller="cookies" data-cookies-oven-id="<%= @oven.id %>">
+          <div class="timer text-red-500" data-cookies-target="timer"></div>
+          <%= button_to("Retrieve Cookies", empty_oven_path(@oven),
+            class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-800 btn-retrieve hidden",
+            data: { "oven-id": @oven.id, "cookies-target": "button" }, method: :post) %>
+          <div class="text-ready text-green-500 hidden" data-cookies-target="ready">Cookies are ready!</div>
+        </div>
+      </div>
+    <% else %>
+      <span class="text-red-500" data-cookies-target="empty">Oven is empty</span>
+    <% end %>
   </div>
-   <% else %>
-  <span class="text-red-500">(Oven is empty)</span>
-  <% end %>
-</div>
+<% end %>

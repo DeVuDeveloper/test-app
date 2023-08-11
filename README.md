@@ -1,127 +1,43 @@
-# DigiBakery
+# Digital Bakery
 
-DigiBakery is an artisanal digital bakery, crafting the finest digital cookies in the world.
+## Screenshots
 
-We don't mass produce our cookies in faceless factories. Instead, We bake cookies to order, one at a time.
+<div style="display: flex; justify-content: space-between;">
+  <img src="app/assets/images/bakery1.png" alt="bakery 1" width="30%">
+  <img src="app/assets/images/bakery2.png" alt="bakery 2" width="30%">
+  <img src="app/assets/images/bakery3.png" alt="bakery 3" width="30%">
+</div>
 
-## Backlog
+Digital Bakery is a modern web application built using Rails, React, and Vite, showcasing the seamless integration of client-side development with the power of server-side rendering. The application is designed to simulate the experience of running a bakery, where users can place and fulfill orders for digital cookies.
 
-The following backlog contains several bugs and features needing attention. Please resolve each item in order.
+## Features
 
-Please try not to spend more than 4 hours on this exercise. We are not looking for a perfect solution, but rather a demonstration of your ability to work with the technologies, and your approach to resolving each item.
+- **Real-time Baking Progress:** Witness the magic of modern web technologies with Hotwire, Stimulus, and Vite. The application showcases the dynamic nature of baking, allowing you to experience the entire process in real-time as the cookies go through preparation, baking, and fulfillment. Thanks to Turbo Streams and Turbo Frames, only the relevant parts of the page update, providing a fluid user experience.
 
-> **IMPORTANT!** 🔥
->
-> Please do not fork this repository. Instead, clone it to your local machine and push your changes to a new **_PRIVATE_** repository in your own GitHub account. This will allow us to review your work in isolation.
+- **Order Management:** React comes into play for managing orders. The Orders section allows you to view, sort, and track the status of each order. You'll know exactly when an order is in progress or has been fulfilled, enhancing your bakery management experience.
 
-### Bug: React console warning
+- **Responsive Design:** The user interface is beautifully crafted using Tailwind CSS, ensuring a responsive and visually appealing design across various devices. Whether you're on a desktop, tablet, or smartphone, Digital Bakery adapts seamlessly.
 
-When visiting the Order Listing page, I see the following warning:
+## How to Run
 
-"Warning: Each child in an array or iterator should have a unique "key" prop."
+1. Clone this repository to your local machine.
+2. Install the required dependencies using `bundle install` and `yarn install`.
+3. Start the application using `bin/dev`.
+4. Open your web browser and visit [http://localhost:3000](http://localhost:3000) to experience the Digital Bakery.
 
-We should resolve this.
+## Screenshots
 
-### Feature: As a bakery owner, I should be able to place a sheet with multiple cookies into an oven
+![Order Management](screenshots/orders.png)
 
-Given I have an oven
+![Baking Progress](screenshots/baking.png)
 
-When I am on the oven page
+## GitHub Actions
 
-Then I should be able to prepare a batch of cookies with the same filling
+The power of modern development practices is showcased through GitHub Actions. Pull request triggers a series of automated checks, including linting, RSpec tests, and Jest tests. This ensures that the codebase remains consistent, and potential issues are caught early in the development process.
 
-When the batch of cookies is finished cooking
+## Conclusion
 
-Then I should be able to remove the cookies into my store inventory
+Thank you for exploring the Digital Bakery application. I have leveraged the latest web technologies to create a seamless and immersive user experience in the world of digital cookies. This project demonstrates our expertise in working with Rails, React, Hotwire, Stimulus, Tailwind CSS, and Vite. As we continue to enhance the Digital Bakery, we look forward to tackling new challenges and delivering innovative solutions.
 
-### Feature: cookies should actually be cooked
-
-We lazily added to Cookie: def ready?; true; end
-
-But, the cookies are not actually ready instantly! When a cookie is placed in the oven, we need to trigger a background cooking worker to cook the cookies and update their state after a couple minutes of "cooking"
-
-### Feature: As a bakery owner, I should see the oven page update automatically when the cookies are ready
-
-Given I have unfinished cookies in an oven
-
-And I am on the oven page
-
-Then I should see that the cookies are not yet ready
-
-When the cookies finish cooking
-
-Then I should see that the cookies are ready
-
-> **Note:** This can be non-instant (e.g. performed through periodic polling is acceptable), but only the relevant part of the page should update.
-
-### Feature: Add loading indicator for Order Listing
-
-Given there are orders in the system
-
-When I visit the orders page
-
-Then I should see a loading indicator that signifies that order data is being fetched
-
-When the data has finished loading
-
-Then I see the order listing
-
-### Feature: Sorting order listing table
-
-Given there are orders in the system
-
-When I visit the orders page
-
-Then I should see "Order #", "Customer Name" and "Pick up at" column headers underlined, signifying that i can click on the header to sort the column
-
-When I click on a sortable column header
-
-Then the data in the table is reordered by that particular column in ascending order
-
-### Feature: Marking orders fulfilled
-
-Given there are orders in the system
-
-When I visit the orders page
-
-Then I should see that unfulfilled (in progress) orders have a button in the actions column called "Fulfill order".
-
-When I click on "Fulfill order"
-
-Then the button for that row becomes disabled
-
-When the order has been fulfilled (by API call)
-The button for that row disappears
-And the order status for that row is updated
-
-When I refresh the page
-I can see that the order status still says Fulfilled
-
-## Requirements
-
-This application requires:
-
-- Ruby 3.2.*
-- Node
-- NPM
-
-## Dependency Installation
-
-```bash
-bundle install
-npm install
-```
-
-## Test Suite
-
-Like most bakeries, DigiBakery has a test suite. The full suite can be run with:
-
-```bash
-rspec spec
-```
-
-## Database Seed Data
-
-```bash
-rails db:setup
-```
+Warm regards,
+Dejan

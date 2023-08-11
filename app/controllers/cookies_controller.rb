@@ -1,49 +1,45 @@
 class CookiesController < ApplicationController
+  include ActionView::RecordIdentifier
   include OvenLoading
-
-  rescue_from Cookies::CreateService::ValidationError, with: :render_form_with_errors
   before_action :authenticate_user!
   before_action :load_oven, only: [:new, :create]
 
-  def new
-    if @oven.cookies.any?
-      respond_to do |format|
-        format.html { redirect_to @oven, alert: "Cookies are already in the oven!" }
-        format.turbo_stream { flash.now[:alert] = "Cookies are already in oven" }
-      end
-    else
-      @cookie = @oven.cookies.build
-    end
-  end
-
   def create
-    create_service = Cookies::CreateService.new(@oven, cookie_params)
-    if create_service.call
-      cookies_created_successfully
+    if cookies_already_in_oven?
+      oven_already_has_cookies
     else
-      @cookie = create_service.cookie
-      render :new, status: :unprocessable_entity
+      create_service = Cookies::CreateService.new(@oven, cookie_params)
+      validation_service = Cookies::ValidationService.new(cookie_params)
+
+      if validation_service.validate.nil? && create_service.call
+        cookies_created_successfully
+      else
+        @cookie = @oven.cookies.build(cookie_params)
+        flash.now[:alert] = validation_service.validate || create_service.error_message
+        respond_to do |format|
+          format.html { redirect_to ovens_path, alert: flash.now[:alert] }
+          format.turbo_stream { flash.now[:alert] = flash.now[:alert] }
+        end
+      end
     end
   end
 
   private
 
-  def render_form_with_errors(exception)
-    @cookie = exception.cookie
-    @ovens = current_user.ovens
-    render "ovens/index", status: :unprocessable_entity
+  def cookies_already_in_oven?
+    @oven.cookies.present?
   end
 
   def oven_already_has_cookies
     respond_to do |format|
-      format.html { redirect_to @oven, alert: "Cookies are already in the oven!" }
+      format.html { redirect_to ovens_path, alert: "Cookies are already in the oven!" }
       format.turbo_stream { flash.now[:alert] = "Cookies are already in the oven!" }
     end
   end
 
   def cookies_created_successfully
     respond_to do |format|
-      format.html { redirect_to oven_path(@oven), notice: "Cookies were successfully created." }
+      format.html { redirect_to ovens_path, notice: "Cookies were successfully created." }
       format.turbo_stream { flash.now[:notice] = "Cookies were successfully created." }
     end
   end

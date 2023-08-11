@@ -3,15 +3,14 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["button", "selectedFilling"];
   lastSelectedButton = null;
+
   connect() {
-    console.log('Controller connected');
     this.buttonTargets.forEach(button => {
       button.addEventListener("click", this.selectFilling.bind(this));
     });
 
     const initialSelectedFilling = this.selectedFillingTarget.value;
-    console.log('Initial selected filling:', initialSelectedFilling);
-
+  
     if (initialSelectedFilling) {
       const initialButton = this.buttonTargets.find(
         button => button.getAttribute("data-filling") === initialSelectedFilling
@@ -34,7 +33,5 @@ export default class extends Controller {
 
     button.classList.add("active");
     this.lastSelectedButton = button;
-
-    console.log('Selected filling:', filling);
   }
 }

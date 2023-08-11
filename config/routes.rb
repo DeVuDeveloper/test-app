@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   authenticated :user do
-    root to: "store#index", as: :store_root
+    root to: "ovens#index", as: :store_root
   end
 
   root to: "visitors#index"
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       post :empty
       get :oven_status
+      patch :toggle_status
     end
   end
 
