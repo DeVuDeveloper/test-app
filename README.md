@@ -16,6 +16,9 @@ Digital Bakery is a modern web application built using Rails, React, and Vite, s
 
 - **Order Management:** React comes into play for managing orders. The Orders section allows you to view, sort, and track the status of each order. You'll know exactly when an order is in progress or has been fulfilled, enhancing your bakery management experience.
 
+![Orders](app/assets/images/orders.png)
+
+
 - **Responsive Design:** The user interface is beautifully crafted using Tailwind CSS, ensuring a responsive and visually appealing design across various devices. Whether you're on a desktop, tablet, or smartphone, Digital Bakery adapts seamlessly.
 
 ## How to Run
@@ -25,19 +28,15 @@ Digital Bakery is a modern web application built using Rails, React, and Vite, s
 3. Start the application using `bin/dev`.
 4. Open your web browser and visit [http://localhost:3000](http://localhost:3000) to experience the Digital Bakery.
 
-## Screenshots
-
-![Order Management](screenshots/orders.png)
-
-![Baking Progress](screenshots/baking.png)
-
 ## GitHub Actions
+
+![Github Actions](app/assets/images/linter.png)
 
 The power of modern development practices is showcased through GitHub Actions. Pull request triggers a series of automated checks, including linting, RSpec tests, and Jest tests. This ensures that the codebase remains consistent, and potential issues are caught early in the development process.
 
 ## Conclusion
 
-Thank you for exploring the Digital Bakery application. I have leveraged the latest web technologies to create a seamless and immersive user experience in the world of digital cookies. This project demonstrates our expertise in working with Rails, React, Hotwire, Stimulus, Tailwind CSS, and Vite. As we continue to enhance the Digital Bakery, we look forward to tackling new challenges and delivering innovative solutions.
+Thank you for exploring the Digital Bakery application. I have leveraged the latest web technologies to create a seamless and immersive user experience in the world of digital cookies. This project demonstrates omy expertise in working with Rails, React, Hotwire, Stimulus, Tailwind CSS, and Vite. As I continue to enhance the Digital Bakery, I look forward to tackling new challenges and delivering innovative solutions.
 
 Warm regards,
 Dejan
