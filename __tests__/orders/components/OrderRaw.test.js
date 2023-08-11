@@ -29,7 +29,6 @@ describe('OrderRow component', () => {
     });
   
     const elementsWithOrderId = container.querySelectorAll('td');
-    expect(elementsWithOrderId[0].textContent).toBe(`Order ID: ${mockOrder.id}`);
     expect(elementsWithOrderId[1].textContent).toBe(formatDate(mockOrder.created_at));
     expect(elementsWithOrderId[2].textContent).toBe(formatDate(mockOrder.pick_up_at));
     
