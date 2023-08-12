@@ -17,6 +17,23 @@ class OvensController < ApplicationController
     render json: oven_status_json
   end
 
+  def toggle_status
+    @oven = Oven.find(params[:id])
+    new_status = @oven.online ? false : true
+
+    if @oven.update(online: new_status)
+      respond_to do |format|
+        format.html { redirect_to ovens_path, notice: 'Oven status updated.' }
+        format.json { render json: { new_status: @oven.online ? 'Online' : 'Offline' } }
+      end
+    else
+      respond_to do |format|
+        format.html { render :index, alert: 'Failed to update oven status.' }
+        format.json { render json: { error: 'Failed to toggle oven status' }, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_oven
@@ -31,17 +48,6 @@ class OvensController < ApplicationController
     respond_to do |format|
       format.html { redirect_to oven_path(@oven) }
       format.turbo_stream
-    end
-  end
-
-  def toggle_status
-    oven = Oven.find(params[:id])
-    new_status = params[:online] == "true"
-
-    if oven.update(online: new_status)
-      render json: {new_status: oven.online ? "Online" : "Offline"}
-    else
-      render json: {error: "Failed to toggle oven status"}, status: :unprocessable_entity
     end
   end
 

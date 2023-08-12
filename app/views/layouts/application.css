@@ -5,7 +5,7 @@ main {
 
 .flash {
   position: fixed;
-  top: 6rem;
+  top: 4rem;
   left: 52%;
   transform: translateX(-50%);
 
@@ -23,6 +23,8 @@ main {
   font-size: 0.875rem;
   animation: appear-then-fade 4s both;
   border-radius: 999px;
+  margin-top: -10px;
+  margin-right: 100px;
 }
 
 .flash__message-notice {
@@ -53,5 +55,9 @@ main {
 
 .filling-button.active {
   background-color: #cca694;
+}
+
+.svg-icon-red {
+  fill: red;
 }
 

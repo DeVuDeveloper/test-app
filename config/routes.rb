@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :ovens do
     resources :cookies, only: [:new, :create]
+
     member do
       post :empty
       get :oven_status

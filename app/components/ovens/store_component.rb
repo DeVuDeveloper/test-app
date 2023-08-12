@@ -1,6 +1,7 @@
 class Ovens::StoreComponent < ViewComponent::Base
-  def initialize(current_user)
+  def initialize(current_user:, cookie:)
     @current_user = current_user
+    @cookie = cookie
   end
 
   private
