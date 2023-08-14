@@ -23,13 +23,13 @@ class OvensController < ApplicationController
 
     if @oven.update(online: new_status)
       respond_to do |format|
-        format.html { redirect_to ovens_path, notice: 'Oven status updated.' }
-        format.json { render json: { new_status: @oven.online ? 'Online' : 'Offline' } }
+        format.html { redirect_to ovens_path, notice: "Oven status updated." }
+        format.json { render json: {new_status: @oven.online ? "Online" : "Offline"} }
       end
     else
       respond_to do |format|
-        format.html { render :index, alert: 'Failed to update oven status.' }
-        format.json { render json: { error: 'Failed to toggle oven status' }, status: :unprocessable_entity }
+        format.html { render :index, alert: "Failed to update oven status." }
+        format.json { render json: {error: "Failed to toggle oven status"}, status: :unprocessable_entity }
       end
     end
   end

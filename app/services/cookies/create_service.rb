@@ -1,19 +1,12 @@
 class Cookies::CreateService < ApplicationService
-  def initialize(oven, params)
+  def initialize(user, oven, params)
+    @user = user
     @oven = oven
     @params = params
   end
 
   def call
     create_cookies
-  end
-
-  def total_price
-    @total_price
-  end
-
-  def change
-    @params[:price].to_f - @total_price
   end
 
   private
@@ -36,4 +29,3 @@ class Cookies::CreateService < ApplicationService
     "Error creating cookies"
   end
 end
-

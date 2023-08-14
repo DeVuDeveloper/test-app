@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+  resources :users, only: [:show, :update] do
+    patch "add_balance", on: :member
+  end
 
   authenticated :user do
     root to: "ovens#index", as: :store_root
@@ -8,7 +11,11 @@ Rails.application.routes.draw do
   root to: "visitors#index"
 
   resources :ovens do
-    resources :cookies, only: [:new, :create]
+    resources :cookies, only: [:new, :create] do
+      member do
+        post :claim_change
+      end
+    end
 
     member do
       post :empty

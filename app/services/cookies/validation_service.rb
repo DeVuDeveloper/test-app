@@ -26,4 +26,3 @@ module Cookies
     end
   end
 end
-

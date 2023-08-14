@@ -3,114 +3,100 @@
 <section class="flex flex-col justify-around px-8 bg-gradient-to-b from-gray-900 to-gray-700 text-white items-center py-6 -my-2">
   <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
 
-    <div class="flex justify-between">
-      <%= form_with(model: @oven, url: toggle_status_oven_path(@oven), method: :patch, class: 'toggle-form') do |f| %>
-        <%= f.hidden_field :online, value: @oven.online ? 'false' : 'true' %>
-        <button type="submit" class="mt-4">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" class="svg-icon-red" style="width: 1.5em; height: 1.5em;">
-            <path d="M48 91.17a39.24 39.24 0 0 1-21.51-72 4 4 0 1 1 4.39 6.69 31.23 31.23 0 1 0 34.23 0 4 4 0 1 1 4.39-6.69 39.24 39.24 0 0 1-21.5 72Zm4-50V8.83a4 4 0 1 0-8 0v32.33a4 4 0 0 0 8 0Z" data-name="Artboard 30"></path>
-          </svg>
+    <%= turbo_frame_tag "balance" do %>
+      <%= render "users/user_form" %>
+    <% end %>
+
+    <div class="">
+      <% claimable_change = current_user.change_to_claim(5, 6) %>
+      <%= debug "Overpaid Amount: #{claimable_change}" %>
+      <% if claimable_change.positive? %>
+        <button id="claim-change-button" class="mt-2 py-1 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded transition duration-300 ease-in-out">
+          Claim Change: <%= number_to_currency(claimable_change) %>
         </button>
       <% end %>
-
-      <div class="flex gap-2  mt-2 p-4">
-        <div class="w-3 h-3 bg-<%= @oven.online ? 'green' : 'red' %>-400 rounded-full"></div>
-        <p class="text-<%= @oven.online ? 'green' : 'red' %>-600 font-semibold">
-          <%= @oven.online ? 'Online' : 'Offline' %>
-        </p>
-      </div>
     </div>
+  
 
-    <%= simple_form_for [@oven, @cookie],
+  <%= render "ovens/toggle", oven: @oven %>
+
+  <%= simple_form_for [@oven, @cookie],
       remote: true,
       html: { class: 'form-horizontal',
               id: 'cookie-form',
               'data-turbo-frame': dom_id(@oven, "cookie_info"),
               'data-controller': 'form-reset',
               'data-action': 'submit->form-reset#resetForm' } do |f| %>
-      
-      <%= form_error_notification(@cookie) %>
-    
-      <%= turbo_frame_tag dom_id(@oven, "store") do %>
-        <%= render Ovens::StoreComponent.new(current_user: current_user, cookie: @cookie) %>
-      <% end %>
-      
-      <div class="bg-gray-500 rounded-lg mt-4 p-4">
-        <div class="flex justify-between">
-          <label for="quantity" class="text-lg font-semibold mb-2">Qty</label>
-          <div class="flex items-center">
-            <%= f.number_field :quantity, id: "quantity", value: 0, min: 1, class: "w-16 h-8 px-2 py-1 border rounded-lg mr-2 text-lg text-gray-800 bg-gray-100", data: { price_per_cookie: 1 } %>
-          </div>
-          <p class="text-gray-100">Total Price: <span id="total-price">0</span> dollars</p>
-        </div>
-        <label for="time" class="text-lg font-semibold mb-2">Time</label>
-        <div class="flex items-center">
-          <%= f.number_field :cooking_time, id: "time", value: 25, min: 25, class: "w-16 h-8 px-2 py-1 border rounded-lg mr-2 text-lg text-gray-800 bg-gray-100" %>
-          <p class="text-gray-100">sec</p>
-        </div>
-        <div class="mt-2">
-          <div class="h-2 bg-gray-200 rounded-full">
-            <div class="h-full bg-green-500 rounded-full"></div>
-          </div>
-        </div>
-      </div>
+    <%= form_error_notification(@cookie) %>
 
-      <%= render 'ovens/buttons', f: f %>
+    <%= turbo_frame_tag dom_id(@oven, "store") do %>
+      <%= render Ovens::StoreComponent.new(current_user: current_user, cookie: @cookie) %>
     <% end %>
 
-    <div class="flex justify-center items-center bg-gray-500 rounded-lg p-4 h-96">
-      <%= turbo_frame_tag dom_id(@oven, "cookie_info") do %>
-        <%= render Ovens::CookieInfoComponent.new(oven: @oven) %>
-      <% end %>
+    <div class="bg-gray-500 rounded-lg mt-4 p-4">
+      <div class="flex justify-between">
+        <label for="quantity" class="text-lg font-semibold mb-2">Qty</label>
+        <div class="flex items-center">
+          <%= f.number_field :quantity, id: "quantity", value: 0, min: 1, class: "w-16 h-8 px-2 py-1 border rounded-lg mr-2 text-lg text-gray-800 bg-gray-100", data: { price_per_cookie: 1 } %>
+        </div>
+        <p class="text-gray-100">Total Price: <span id="total-price">0</span> dollars</p>
+      </div>
+      <label for="time" class="text-lg font-semibold mb-2">Time</label>
+      <div class="flex items-center">
+        <%= f.number_field :cooking_time, id: "time", value: 25, min: 25, class: "w-16 h-8 px-2 py-1 border rounded-lg mr-2 text-lg text-gray-800 bg-gray-100" %>
+        <p class="text-gray-100">sec</p>
+      </div>
+      <div class="mt-2">
+        <div class="h-2 bg-gray-200 rounded-full">
+          <div class="h-full bg-green-500 rounded-full"></div>
+        </div>
+      </div>
     </div>
+
+    <%= render 'ovens/buttons', f: f %>
+  <% end %>
+
+  <div class="flex justify-center items-center bg-gray-500 rounded-lg p-4 h-96">
+    <%= turbo_frame_tag dom_id(@oven, "cookie_info") do %>
+      <%= render Ovens::CookieInfoComponent.new(oven: @oven) %>
+    <% end %>
   </div>
+   </div>
 </section>
 
 <script>
   document.addEventListener('turbo:load', () => {
     const quantityInput = document.getElementById('quantity');
+    const priceInput = document.getElementById('price');
     const totalPriceSpan = document.getElementById('total-price');
+    const paidAmountSpan = document.getElementById('paid-amount');
+    const changeDisplay = document.getElementById('change-display');
+    const claimChangeButton = document.getElementById('claim-change-button');
 
-    quantityInput.addEventListener('input', () => {
+    function calculateTotalPrice() {
       const quantity = parseInt(quantityInput.value);
       const pricePerCookie = parseFloat(quantityInput.getAttribute('data-price-per-cookie'));
       const totalPrice = quantity * pricePerCookie;
 
-      totalPriceSpan.textContent = totalPrice.toFixed(2);
-    });
-  });
+      const paidAmount = parseFloat(priceInput.value); // Declare and initialize paidAmount here
 
+      if (paidAmount >= totalPrice) {
+        const change = paidAmount - totalPrice;
+        changeDisplay.textContent = 'Change: $' + change.toFixed(2);
+        claimChangeButton.style.display = 'block';
+      } else {
+        changeDisplay.textContent = '';
+        claimChangeButton.style.display = 'none';
+      }
 
-  document.addEventListener('turbo:load', () => {
-  const quantityInput = document.getElementById('quantity');
-  const priceInput = document.getElementById('price');
-  const totalPriceSpan = document.getElementById('total-price');
-  const changeDisplay = document.getElementById('change-display');
-
-  quantityInput.addEventListener('input', () => {
-    calculateTotalPrice();
-  });
-
-  priceInput.addEventListener('input', () => {
-    calculateTotalPrice();
-  });
-
-  function calculateTotalPrice() {
-    const quantity = parseInt(quantityInput.value);
-    const pricePerCookie = parseFloat(quantityInput.getAttribute('data-price-per-cookie'));
-    const totalPrice = quantity * pricePerCookie;
-
-    const paidAmount = parseFloat(priceInput.value);
-    if (paidAmount >= totalPrice) {
-      const change = paidAmount - totalPrice;
-      changeDisplay.textContent = `Change: $${change.toFixed(2)}`;
-    } else {
-      changeDisplay.textContent = '';
+      totalPriceSpan.textContent = 'Total Price: $' + totalPrice.toFixed(2);
+      paidAmountSpan.textContent = 'Paid: $' + paidAmount.toFixed(2);
     }
 
-    totalPriceSpan.textContent = totalPrice.toFixed(2);
-  }
-});
+    quantityInput.addEventListener('input', calculateTotalPrice);
+    priceInput.addEventListener('input', calculateTotalPrice);
 
+    calculateTotalPrice();
+  });
 </script>
 
