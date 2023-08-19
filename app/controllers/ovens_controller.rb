@@ -6,6 +6,8 @@ class OvensController < ApplicationController
     @ovens = current_user.ovens
     @oven = Oven.first
     @cookie = Cookie.new
+    @quantity = params[:quantity].to_i
+    @price = params[:price].to_f
   end
 
   def empty

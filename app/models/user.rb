@@ -3,6 +3,7 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :trackable, :validatable
 
   has_many :ovens, dependent: :destroy
+  has_many :stored_cookies, class_name: "Cookie", as: :storage
   before_create :setup_first_oven
 
   def add_to_balance(amount)

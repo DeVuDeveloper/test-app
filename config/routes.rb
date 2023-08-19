@@ -11,10 +11,8 @@ Rails.application.routes.draw do
   root to: "visitors#index"
 
   resources :ovens do
-    resources :cookies, only: [:new, :create] do
-      member do
-        post :claim_change
-      end
+    resources :cookies, only: [:create] do
+      post :claim_change, on: :collection
     end
 
     member do

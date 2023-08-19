@@ -1,7 +1,0 @@
-<p>Current User: <%= current_user.email %></p>
-<p>Balance: <%= number_to_currency(current_user.balance) %></p>
-
-<%= form_with model: current_user, url: add_balance_user_path(current_user), local: true, data: { turbo_frame: "balance" } do |f| %>
-  <%= f.number_field :balance, id: "add-balance-amount", value: 0, min: 1, class: "w-16 h-8 px-2 py-1 border rounded-lg mr-2 text-lg text-gray-800 bg-gray-100", data: { price_per_cookie: 1 } %>
-  <%= f.submit "Add Balance" %>
-<% end %>

@@ -1,42 +1,45 @@
-# Digital Bakery
+# Cookies Vending Machine
 
 ## Screenshots
 
-<div style="display: flex; justify-content: space-between;">
-  <img src="app/assets/images/bakery1.png" alt="bakery 1" width="30%">
-  <img src="app/assets/images/bakery2.png" alt="bakery 2" width="30%">
-  <img src="app/assets/images/bakery3.png" alt="bakery 3" width="30%">
-</div>
+![Vending Machine 1](app/assets/images/screen1.png) | ![Vending Machine 2](app/assets/images/screen2.png) | ![Vending Machine 3](app/assets/images/screen3.png)
+:-------------------------:|:-------------------------:|:-------------------------:
+Vending Machine 1           | Vending Machine 2           | Vending Machine 3
 
-Digital Bakery is a modern web application built using Rails, React, and Vite, showcasing the seamless integration of client-side development with the power of server-side rendering. The application is designed to simulate the experience of running a bakery, where users can place and fulfill orders for digital cookies.
+The Cookies Vending Machine is a cutting-edge web application created using a combination of Rails, React, and Vite. This innovative project showcases the fusion of server-side rendering with the prowess of client-side development. The application simulates the experience of interacting with a digital vending machine where users can purchase various cookies with different toppings.
 
 ## Features
 
-- **Real-time Baking Progress:** Witness the magic of modern web technologies with Hotwire, Stimulus, and Vite. The application showcases the dynamic nature of baking, allowing you to experience the entire process in real-time as the cookies go through preparation, baking, and fulfillment. Thanks to Turbo Streams and Turbo Frames, only the relevant parts of the page update, providing a fluid user experience.
+### Interactive Vending Experience
 
-- **Order Management:** React comes into play for managing orders. The Orders section allows you to view, sort, and track the status of each order. You'll know exactly when an order is in progress or has been fulfilled, enhancing your bakery management experience.
+Powered by a blend of React, Hotwire, Stimulus, and Vite, the Vending Machine provides a dynamic and engaging experience. Users can witness the entire process in real-time as they select their desired cookies, add toppings, and see the virtual vending machine respond accordingly. Turbo Streams and Turbo Frames ensure that only the relevant parts of the page are updated, resulting in a seamless and fluid user journey.
 
-![Orders](app/assets/images/orders.png)
+### Cookie Purchases and Balance Management
+
+Leveraging React, the application enables users to buy cookies from the vending machine. If the user has sufficient funds in their balance, they can purchase one or more cookies with different toppings. The cost of each cookie is deducted from the user's balance. The vending machine can be toggled on and off. When turned off, cookie purchases are disabled.
 
 
-- **Responsive Design:** The user interface is beautifully crafted using Tailwind CSS, ensuring a responsive and visually appealing design across various devices. Whether you're on a desktop, tablet, or smartphone, Digital Bakery adapts seamlessly.
+### Responsive and Visually Appealing Design
 
-## How to Run
+The user interface, designed with Tailwind CSS, is not only visually appealing but also responsive across various devices. Regardless of whether users access the application on a desktop, tablet, or smartphone, the interface adapts seamlessly.
 
-1. Clone this repository to your local machine.
-2. Install the required dependencies using `bundle install` and `yarn install`.
-3. Start the application using `bin/dev`.
-4. Open your web browser and visit [http://localhost:3000](http://localhost:3000) to experience the Digital Bakery.
+## How to Operate
 
-## GitHub Actions
+1. Clone the repository to your local machine.
+2. Install the necessary dependencies using `bundle install` and `yarn install`.
+3. Launch the application with the command `bin/dev`.
+4. Open your web browser and navigate to [http://localhost:3000](http://localhost:3000) to experience the Cookies Vending Machine.
 
-![Github Actions](app/assets/images/linter.png)
+## GitHub Actions Integration
 
-The power of modern development practices is showcased through GitHub Actions. Pull request triggers a series of automated checks, including linting, RSpec tests, and Jest tests. This ensures that the codebase remains consistent, and potential issues are caught early in the development process.
+![GitHub Actions](app/assets/images/linter.png)
+
+The potency of contemporary development practices is exemplified through GitHub Actions. Pull requests trigger an automated workflow encompassing linting, RSpec tests, and Jest tests. This approach guarantees codebase consistency and the early identification of potential issues during the development cycle.
 
 ## Conclusion
 
-Thank you for exploring the Digital Bakery application. I have leveraged the latest web technologies to create a seamless and immersive user experience in the world of digital cookies. This project demonstrates omy expertise in working with Rails, React, Hotwire, Stimulus, Tailwind CSS, and Vite. As I continue to enhance the Digital Bakery, I look forward to tackling new challenges and delivering innovative solutions.
+Thank you for exploring the Cookies Vending Machine application. I've harnessed the latest web technologies to create an immersive and captivating user experience centered around digital cookie purchases. This endeavor showcases my proficiency in working with Rails, React, Hotwire, Stimulus, Tailwind CSS, and Vite. As I continue to enhance the Cookies Vending Machine, I eagerly anticipate conquering fresh challenges and delivering ingenious solutions.
 
 Warm regards,
-Dejan
+@DevuDeveloper
+

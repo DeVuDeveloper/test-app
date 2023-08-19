@@ -45,10 +45,13 @@ class CookiesController < ApplicationController
   end
 
   def claim_change
-    paid_amount = params[:paid_amount].to_f
-    total_price = params[:total_price].to_f
+    paid_amount = params[:cookie][:price].to_f
+    total_price = params[:cookie][:quantity].to_i
 
-    change_to_claim = paid_amount - total_price
+    @quantity = total_price
+    @price = paid_amount
+
+    change_to_claim = current_user.change_to_claim(total_price, paid_amount)
 
     if change_to_claim.positive?
       current_user.add_to_balance(change_to_claim)
