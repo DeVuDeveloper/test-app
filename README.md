@@ -1,127 +1,45 @@
-# DigiBakery
+# Cookies Vending Machine
 
-DigiBakery is an artisanal digital bakery, crafting the finest digital cookies in the world.
+## Screenshots
 
-We don't mass produce our cookies in faceless factories. Instead, We bake cookies to order, one at a time.
+![Vending Machine 1](app/assets/images/screen1.png) | ![Vending Machine 2](app/assets/images/screen2.png) | ![Vending Machine 3](app/assets/images/screen3.png)
+:-------------------------:|:-------------------------:|:-------------------------:
+Vending Machine 1           | Vending Machine 2           | Vending Machine 3
 
-## Backlog
+The Cookies Vending Machine is a cutting-edge web application created using a combination of Rails, React, and Vite. This innovative project showcases the fusion of server-side rendering with the prowess of client-side development. The application simulates the experience of interacting with a digital vending machine where users can purchase various cookies with different toppings.
 
-The following backlog contains several bugs and features needing attention. Please resolve each item in order.
+## Features
 
-Please try not to spend more than 4 hours on this exercise. We are not looking for a perfect solution, but rather a demonstration of your ability to work with the technologies, and your approach to resolving each item.
+### Interactive Vending Experience
 
-> **IMPORTANT!** 🔥
->
-> Please do not fork this repository. Instead, clone it to your local machine and push your changes to a new **_PRIVATE_** repository in your own GitHub account. This will allow us to review your work in isolation.
+Powered by a blend of React, Hotwire, Stimulus, and Vite, the Vending Machine provides a dynamic and engaging experience. Users can witness the entire process in real-time as they select their desired cookies, add toppings, and see the virtual vending machine respond accordingly. Turbo Streams and Turbo Frames ensure that only the relevant parts of the page are updated, resulting in a seamless and fluid user journey.
 
-### Bug: React console warning
+### Cookie Purchases and Balance Management
 
-When visiting the Order Listing page, I see the following warning:
+Leveraging React, the application enables users to buy cookies from the vending machine. If the user has sufficient funds in their balance, they can purchase one or more cookies with different toppings. The cost of each cookie is deducted from the user's balance. The vending machine can be toggled on and off. When turned off, cookie purchases are disabled.
 
-"Warning: Each child in an array or iterator should have a unique "key" prop."
 
-We should resolve this.
+### Responsive and Visually Appealing Design
 
-### Feature: As a bakery owner, I should be able to place a sheet with multiple cookies into an oven
+The user interface, designed with Tailwind CSS, is not only visually appealing but also responsive across various devices. Regardless of whether users access the application on a desktop, tablet, or smartphone, the interface adapts seamlessly.
 
-Given I have an oven
+## How to Operate
 
-When I am on the oven page
+1. Clone the repository to your local machine.
+2. Install the necessary dependencies using `bundle install` and `yarn install`.
+3. Launch the application with the command `bin/dev`.
+4. Open your web browser and navigate to [http://localhost:3000](http://localhost:3000) to experience the Cookies Vending Machine.
 
-Then I should be able to prepare a batch of cookies with the same filling
+## GitHub Actions Integration
 
-When the batch of cookies is finished cooking
+![GitHub Actions](app/assets/images/linter.png)
 
-Then I should be able to remove the cookies into my store inventory
+The potency of contemporary development practices is exemplified through GitHub Actions. Pull requests trigger an automated workflow encompassing linting, RSpec tests, and Jest tests. This approach guarantees codebase consistency and the early identification of potential issues during the development cycle.
 
-### Feature: cookies should actually be cooked
+## Conclusion
 
-We lazily added to Cookie: def ready?; true; end
+Thank you for exploring the Cookies Vending Machine application. I've harnessed the latest web technologies to create an immersive and captivating user experience centered around digital cookie purchases. This endeavor showcases my proficiency in working with Rails, React, Hotwire, Stimulus, Tailwind CSS, and Vite. As I continue to enhance the Cookies Vending Machine, I eagerly anticipate conquering fresh challenges and delivering ingenious solutions.
 
-But, the cookies are not actually ready instantly! When a cookie is placed in the oven, we need to trigger a background cooking worker to cook the cookies and update their state after a couple minutes of "cooking"
+Warm regards,
+@DevuDeveloper
 
-### Feature: As a bakery owner, I should see the oven page update automatically when the cookies are ready
-
-Given I have unfinished cookies in an oven
-
-And I am on the oven page
-
-Then I should see that the cookies are not yet ready
-
-When the cookies finish cooking
-
-Then I should see that the cookies are ready
-
-> **Note:** This can be non-instant (e.g. performed through periodic polling is acceptable), but only the relevant part of the page should update.
-
-### Feature: Add loading indicator for Order Listing
-
-Given there are orders in the system
-
-When I visit the orders page
-
-Then I should see a loading indicator that signifies that order data is being fetched
-
-When the data has finished loading
-
-Then I see the order listing
-
-### Feature: Sorting order listing table
-
-Given there are orders in the system
-
-When I visit the orders page
-
-Then I should see "Order #", "Customer Name" and "Pick up at" column headers underlined, signifying that i can click on the header to sort the column
-
-When I click on a sortable column header
-
-Then the data in the table is reordered by that particular column in ascending order
-
-### Feature: Marking orders fulfilled
-
-Given there are orders in the system
-
-When I visit the orders page
-
-Then I should see that unfulfilled (in progress) orders have a button in the actions column called "Fulfill order".
-
-When I click on "Fulfill order"
-
-Then the button for that row becomes disabled
-
-When the order has been fulfilled (by API call)
-The button for that row disappears
-And the order status for that row is updated
-
-When I refresh the page
-I can see that the order status still says Fulfilled
-
-## Requirements
-
-This application requires:
-
-- Ruby 3.2.*
-- Node
-- NPM
-
-## Dependency Installation
-
-```bash
-bundle install
-npm install
-```
-
-## Test Suite
-
-Like most bakeries, DigiBakery has a test suite. The full suite can be run with:
-
-```bash
-rspec spec
-```
-
-## Database Seed Data
-
-```bash
-rails db:setup
-```

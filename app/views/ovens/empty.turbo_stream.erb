@@ -1,0 +1,9 @@
+<%= turbo_stream.replace dom_id(@oven, "cookie_info") do %>
+  <%= render Ovens::CookieInfoComponent.new(oven: @oven) %>
+<% end %>
+
+<%= turbo_stream.replace dom_id(@oven, "store") do %>
+    <%= render Ovens::StoreComponent.new(current_user: current_user, cookie: @cookie) %>
+<% end %>
+ <%= render_turbo_stream_flash_messages %>
+ 

@@ -6,7 +6,7 @@
     <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class: 'nav-link' %>
   </li>
   <li class="nav-item">
-    <%= link_to 'Order listing', orders_path, class: 'nav-link' %>
+    <%= link_to 'Order listing', orders_path, class: 'nav-link', data: {turbo: false} %>
   </li>
 <% else %>
   <li class="nav-item">

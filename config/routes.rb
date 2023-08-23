@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
   devise_for :users
-
-  authenticated :user do
-    root to: 'store#index', as: :store_root
+  resources :users, only: [:show, :update] do
+    patch "add_balance", on: :member
   end
 
-  root to: 'visitors#index'
+  authenticated :user do
+    root to: "ovens#index", as: :store_root
+  end
+
+  root to: "visitors#index"
 
   resources :ovens do
-    resource :cookies
+    resources :cookies, only: [:create] do
+      post :claim_change, on: :collection
+    end
+
     member do
       post :empty
+      get :oven_status
+      patch :toggle_status
     end
   end
 
@@ -18,9 +26,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :orders, only: [:index] do
-      put :fulfill, on: :member
+      patch :fulfill, on: :member
     end
   end
-
-  # mount MailPreview => 'mail_view' if Rails.env.development?
 end

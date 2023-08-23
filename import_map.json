@@ -1,0 +1,5 @@
+{
+    "imports": {
+        "@hotwired/turbo-rails": "https://cdn.skypack.dev/@hotwired/turbo-rails@7.1.0"
+    }
+}

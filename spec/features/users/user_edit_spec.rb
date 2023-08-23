@@ -1,12 +1,11 @@
-include Warden::Test::Helpers
 Warden.test_mode!
 
 # Feature: User edit
 #   As a user
 #   I want to edit my user profile
 #   So I can change my email address
-feature 'User edit', :devise do
-
+feature "User edit", :devise do
+  include Warden::Test::Helpers
   after(:each) do
     Warden.test_reset!
   end
@@ -15,14 +14,14 @@ feature 'User edit', :devise do
   #   Given I am signed in
   #   When I change my email address
   #   Then I see an account updated message
-  scenario 'user changes email address' do
+  scenario "user changes email address" do
     user = create(:user)
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
     visit edit_user_registration_path(user)
-    fill_in 'Email', :with => 'newemail@example.com'
-    fill_in 'Current password', :with => user.password
-    click_button 'Update'
-    expect(page).to have_content 'Your account has been updated successfully'
+    fill_in "Email", with: "newemail@example.com"
+    fill_in "Current password", with: user.password
+    click_button "Update"
+    expect(page).to have_content "Your account has been updated successfully"
   end
 
   # Scenario: User cannot edit another user's profile
@@ -31,11 +30,10 @@ feature 'User edit', :devise do
   #   Then I see my own 'edit profile' page
   scenario "user cannot cannot edit another user's profile", :me do
     me = create(:user)
-    other = create(:user, email: 'other@example.com')
-    login_as(me, :scope => :user)
+    other = create(:user, email: "other@example.com")
+    login_as(me, scope: :user)
     visit edit_user_registration_path(other)
-    expect(page).to have_content 'Edit User'
-    expect(page).to have_field('Email', with: me.email)
+    expect(page).to have_content "Edit User"
+    expect(page).to have_field("Email", with: me.email)
   end
-
 end

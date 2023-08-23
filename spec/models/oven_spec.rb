@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Oven do
   subject { Oven.new }
 
   describe "associations" do
     it { should belong_to(:user) }
-    it { should have_one(:cookie) }
+    it { should have_many(:cookies) }
   end
 
   describe "validations" do

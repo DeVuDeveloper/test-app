@@ -1,8 +1,8 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryBot.define do
-  factory :cookie, :class => 'Cookie' do
-    association :storage, factory: :oven
+  factory :cookie, class: "Cookie" do
+    storage { association(:oven) }
     fillings { "MyString" }
+    quantity { 1 }
+    cooking_time { 10 }
   end
 end

@@ -1,0 +1,11 @@
+<%= turbo_stream.update Cookie.new, "" %>
+<%= render_turbo_stream_flash_messages %>
+
+<%= turbo_stream.update dom_id(@oven, "cookie_info") do %>
+  <%= render Ovens::CookieInfoComponent.new(oven: @oven) %>
+<% end %>
+
+
+<%= turbo_stream.update "balance" do %>
+  <%= render 'users/user_form' %>
+<% end %>

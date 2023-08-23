@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selects a filling and updates UI 1`] = `
+"<div data-controller="cookie-buttons">
+      <button class="filling-button" data-filling="chocolate">Chocolate</button>
+      <button class="filling-button" data-filling="strawberry">Strawberry</button>
+      <button class="filling-button" data-filling="vanilla">Vanilla</button>
+      <input type="hidden" data-cookie-buttons-target="selectedFilling" value="">
+    </div>"
+`;
+
+exports[`selects a filling and updates UI 2`] = `
+"<div data-controller="cookie-buttons">
+      <button class="filling-button" data-filling="chocolate">Chocolate</button>
+      <button class="filling-button" data-filling="strawberry">Strawberry</button>
+      <button class="filling-button" data-filling="vanilla">Vanilla</button>
+      <input type="hidden" data-cookie-buttons-target="selectedFilling" value="">
+    </div>"
+`;
+
+exports[`selects a filling and updates UI 3`] = `
+"<div data-controller="cookie-buttons">
+      <button class="filling-button" data-filling="chocolate">Chocolate</button>
+      <button class="filling-button" data-filling="strawberry">Strawberry</button>
+      <button class="filling-button" data-filling="vanilla">Vanilla</button>
+      <input type="hidden" data-cookie-buttons-target="selectedFilling" value="">
+    </div>"
+`;

@@ -3,10 +3,10 @@ FactoryBot.define do
     customer_name { Faker::Name.name }
     fulfilled { false }
     item do
-      filling = ['peanut butter', 'chocolate', 'marshmallow', 'icing'].sample
+      filling = ["peanut butter", "chocolate", "marshmallow", "icing"].sample
       "Cookies with #{filling}"
     end
     quantity { Faker::Number.between(from: 2, to: 24) }
-    pick_up_at { Faker::Number.between(from: 1, to: 10).days.from_now }
+    pick_up_at { Faker::Number.between(from: 10, to: 20).days.from_now }
   end
 end

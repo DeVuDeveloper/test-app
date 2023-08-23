@@ -1,19 +1,19 @@
-include Warden::Test::Helpers
 Warden.test_mode!
 
-feature 'Order listing', :devise, :js do
+feature "Order listing", :devise, :js do
+  include Warden::Test::Helpers
   let(:user) { create(:user) }
   let!(:orders) { create_list(:order, 10) }
 
   before do
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
   end
 
   after do
     Warden.test_reset!
   end
 
-  scenario 'user can view orders' do
+  scenario "user can view orders" do
     visit root_path
     click_link "Order listing"
 

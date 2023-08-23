@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from '../../src/orders/App';
+import ErrorBoundary from '../../src/orders/components/ErrorBoundary';
 
-import Orders from "/app/components/orders";
+const rootElement = document.getElementById('root');
 
-const element = document.querySelector("[data-order-table]");
-if (element) {
-  createRoot(element).render(<Orders />);
-}
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  </React.StrictMode>
+);

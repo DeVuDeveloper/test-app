@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetches oven status and updates UI 1`] = `
+"<div data-controller="oven-status" data-oven-id="123">
+      <div data-oven-status-target="timer"></div>
+      <button data-oven-status-target="button">
+        Remaining time: 0 seconds
+      </button>
+      <div data-oven-status-target="ready"></div>
+      <div data-oven-status-target="loader"></div>
+    </div>"
+`;
